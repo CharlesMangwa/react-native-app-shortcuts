@@ -131,7 +131,11 @@ public class RNAppShortcutsModule extends ReactContextBaseJavaModule {
                 .setShortLabel(shortcutDetail.getString(SHORT_LABEL_KEY))
                 .setLongLabel(shortcutDetail.getString(LONG_LABEL_KEY))
                 .setIcon(Icon.createWithResource(currentActivity.getApplicationContext(), iconId))
-                .setIntent(intent)
+                .setIntents(
+                    new Intent[]{
+                        new Intent(currentActivity.getApplicationContext(), currentActivity.getClass()).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK),
+                        intent
+                    })
                 .build();
         return shortcut;
     }
